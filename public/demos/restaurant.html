@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chulha House | Restaurant in Lahore (Demo)</title>
+<meta name="description" content="Demo restaurant website: menu, reservation form, mobile-friendly layout.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF3E4;--ink:#1E1A18;--maroon:#5A1424;--mustard:#E0A526;--card:#FFFFFF;--muted:#5E5A55;--line:#CFD8BE;
+--display:'Young Serif',Georgia,serif;--body:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--maroon);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.1}
+h2{font-size:clamp(1.9rem,6vw,2.8rem);margin-bottom:10px}
+h3{font-size:1.15rem}
+.demo-bar{background:var(--ink);color:#fff;text-align:center;font-size:.85rem;padding:8px 12px}
+.demo-bar a{color:var(--mustard)}
+.top{position:sticky;top:0;z-index:10;background:rgba(238,243,228,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font-family:var(--display);font-size:1.3rem;text-decoration:none;color:var(--maroon)}
+nav{display:flex;gap:18px;align-items:center;font-weight:500;font-size:.95rem}
+nav a{text-decoration:none}
+.pill{background:var(--maroon);color:#fff;padding:8px 16px;border-radius:999px}
+@media(max-width:560px){nav a:not(.pill){display:none}}
+.hero{background:var(--maroon);color:#fff;padding:70px 0 80px}
+.hero h1{font-size:clamp(2.2rem,8vw,4.4rem);max-width:17ch;margin-bottom:20px}
+.tag{color:var(--mustard);font-weight:500;margin-bottom:16px}
+.lead{max-width:52ch;font-size:1.1rem;color:#F1E3D6;margin-bottom:28px}
+.lead.small{color:var(--muted);font-size:1rem;margin-bottom:22px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;font:inherit;font-weight:700;text-decoration:none;padding:13px 24px;border-radius:999px;border:2px solid var(--mustard);color:var(--mustard);background:transparent;cursor:pointer}
+.btn.fill{background:var(--mustard);color:var(--ink)}
+.btn:hover{background:#fff;border-color:#fff;color:var(--ink)}
+.block{padding:70px 20px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tabs button{font:inherit;font-weight:500;padding:8px 16px;border-radius:999px;border:1.5px solid var(--maroon);background:transparent;color:var(--maroon);cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--maroon);color:#fff}
+.menu{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;justify-content:space-between;gap:14px}
+.item p{color:var(--muted);font-size:.93rem;margin-top:4px}
+.price{font-weight:700;color:var(--maroon);white-space:nowrap}
+.reserve{background:#fff;padding:70px 0;border-block:1px solid var(--line)}
+.grid{display:grid;gap:34px}
+@media(min-width:800px){.grid{grid-template-columns:1fr 1.1fr}}
+.note{font-size:.88rem;color:var(--muted)}
+form{display:grid;gap:14px}
+label{display:grid;gap:6px;font-weight:500;font-size:.95rem}
+input,select{font:inherit;padding:12px 14px;border:1.5px solid #B9C4A6;border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.two{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+.err{color:#B00020;font-weight:500;min-height:1.3em}
+.ok{background:#E3F3E3;border:1px solid #9CCB9C;border-radius:10px;padding:12px 14px;font-weight:500}
+form .btn{border-color:var(--maroon);background:var(--maroon);color:#fff}
+form .btn:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.info{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px}
+.info p{color:var(--muted)}
+footer{padding:26px 0;text-align:center;font-size:.88rem;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="demo-bar">Demo project. Chulha House is a made-up restaurant. <a href="/">Back to portfolio</a></div>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#">Chulha House</a>
+    <nav><a href="#menu">Menu</a><a href="#visit">Visit</a><a class="pill" href="#reserve">Reserve a table</a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="tag">Gulberg, Lahore. Open every day, 12 pm to midnight.</p>
+      <h1>Karahi cooked on a live flame, served the moment it's ready.</h1>
+      <p class="lead">Slow-simmered handi, charcoal tikka and a dessert counter that stays open until closing.</p>
+      <div class="cta"><a class="btn fill" href="#reserve">Reserve a table</a><a class="btn" href="#menu">See the menu</a></div>
+    </div>
+  </section>
+
+  <section id="menu" class="wrap block">
+    <h2>Menu</h2>
+    <p class="lead small">Prices in PKR. Tap a category to filter.</p>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="menu" id="menuList"></div>
+  </section>
+
+  <section id="reserve" class="reserve">
+    <div class="wrap grid">
+      <div>
+        <h2>Reserve a table</h2>
+        <p class="lead small">Tell us when you're coming. We'll confirm on WhatsApp within the hour.</p>
+        <p class="note">This is a demo form. Nothing is sent anywhere.</p>
+      </div>
+      <form id="form" novalidate>
+        <label>Your name<input id="name" autocomplete="name" placeholder="Ali Raza"></label>
+        <label>Phone number<input id="phone" inputmode="tel" autocomplete="tel" placeholder="0300 1234567"></label>
+        <div class="two">
+          <label>Date<input id="date" type="date"></label>
+          <label>Time<select id="time"></select></label>
+        </div>
+        <label>Guests<select id="guests"></select></label>
+        <p class="err" id="err" role="alert"></p>
+        <button class="btn fill" type="submit">Request this table</button>
+        <p class="ok" id="ok" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="visit" class="wrap block visit">
+    <h2>Visit</h2>
+    <div class="info">
+      <div><h3>Address</h3><p>12-B Main Boulevard, Gulberg III, Lahore (made-up address)</p></div>
+      <div><h3>Hours</h3><p>Every day, 12 pm to midnight</p></div>
+      <div><h3>Call</h3><p>0300 1234567 (made-up number)</p></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Demo website by Ayesha Nadeem. Not a real restaurant.</div></footer>
+<script>
+// Menu data. Change the dishes, descriptions and prices here.
+const MENU = [
+  { cat: "Karahi & Handi", name: "Chicken Karahi", text: "Tomato, green chilli and ginger, cooked on flame.", price: 2400 },
+  { cat: "Karahi & Handi", name: "Mutton Karahi", text: "Slow-cooked until tender, finished with fresh coriander.", price: 3800 },
+  { cat: "Karahi & Handi", name: "Chicken Handi", text: "Creamy, mildly spiced, served in a clay pot.", price: 2200 },
+  { cat: "BBQ", name: "Chicken Tikka (4 pcs)", text: "Charcoal grilled with a smoky masala marinade.", price: 950 },
+  { cat: "BBQ", name: "Seekh Kabab (4 pcs)", text: "Hand-minced beef with herbs, grilled on skewers.", price: 1100 },
+  { cat: "BBQ", name: "Malai Boti", text: "Soft chicken pieces in cream and white pepper.", price: 1050 },
+  { cat: "Bread & Sides", name: "Garlic Naan", text: "Baked in the tandoor and brushed with butter.", price: 160 },
+  { cat: "Bread & Sides", name: "Mint Raita", text: "Fresh yogurt with mint and roasted cumin.", price: 180 },
+  { cat: "Sweets", name: "Gulab Jamun (2 pcs)", text: "Warm, soaked in cardamom syrup.", price: 320 },
+  { cat: "Sweets", name: "Kheer", text: "Slow-cooked rice pudding with pistachio.", price: 380 },
+];
+
+const $ = s => document.querySelector(s);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pkr = n => "PKR " + n.toLocaleString("en-US");
+
+// menu with category tabs
+const cats = ["All", ...new Set(MENU.map(m => m.cat))];
+let active = "All";
+function renderMenu() {
+  $("#tabs").innerHTML = cats.map(c => `<button role="tab" aria-selected="${c === active}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
+  $("#menuList").innerHTML = MENU.filter(m => active === "All" || m.cat === active)
+    .map(m => `<div class="item"><div><h3>${esc(m.name)}</h3><p>${esc(m.text)}</p></div><span class="price">${pkr(m.price)}</span></div>`).join("");
+}
+$("#tabs").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  active = b.dataset.c;
+  renderMenu();
+});
+renderMenu();
+
+// reservation form
+$("#time").innerHTML = ["12:00", "13:00", "14:00", "19:00", "20:00", "21:00", "22:00"]
+  .map(t => `<option>${t}</option>`).join("");
+$("#guests").innerHTML = Array.from({length: 10}, (_, i) => `<option value="${i + 1}">${i + 1} ${i ? "guests" : "guest"}</option>`).join("");
+const today = new Date().toISOString().slice(0, 10);
+$("#date").min = today;
+$("#date").value = today;
+
+// Pakistani mobile: 03XX-XXXXXXX, +92 3XX XXXXXXX, 0092 3XX XXXXXXX
+function validPkPhone(v) {
+  const d = v.replace(/[\s-]/g, "").replace(/^\+/, "").replace(/^0092/, "92");
+  return /^(92|0)3\d{9}$/.test(d);
+}
+
+$("#form").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = $("#name").value.trim();
+  const phone = $("#phone").value.trim();
+  const date = $("#date").value;
+  const err = $("#err"), ok = $("#ok");
+  ok.hidden = true;
+  if (name.length < 2) { err.textContent = "Please enter your name."; $("#name").focus(); return; }
+  if (!validPkPhone(phone)) { err.textContent = "Enter a Pakistani mobile number, like 0300 1234567."; $("#phone").focus(); return; }
+  if (!date || date < today) { err.textContent = "Pick today's date or a later one."; $("#date").focus(); return; }
+  err.textContent = "";
+  ok.textContent = `Thank you, ${name}. This is a demo, so no booking was made. In a real site, we'd confirm ${$("#guests").value} guest(s) on ${date} at ${$("#time").value}.`;
+  ok.hidden = false;
+  e.target.reset();
+  $("#date").value = today;
+});
+</script>
+</body>
+</html>
