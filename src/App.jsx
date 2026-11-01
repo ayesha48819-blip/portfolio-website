@@ -4,6 +4,7 @@ import {
 } from "./data.js";
 
 const pkr = (n) => n.toLocaleString("en-US");
+const WA_FREE_CALL = encodeURIComponent("Hi Ayesha, I'd like to book a free call about my website project.");
 const WA_HELLO = encodeURIComponent("Hi Ayesha, I saw your portfolio and I'd like to talk about a website.");
 
 const WA_PATH_1 = "M16 4a12 12 0 0 0-10.3 18L4 28l6.2-1.6A12 12 0 1 0 16 4z";
@@ -33,6 +34,18 @@ const ICONS = {
     </svg>
   ),
 };
+
+function CallBanner() {
+  if (!CONFIG.whatsapp) return null;
+  return (
+    <div className="call-banner" role="region" aria-label="Free call offer">
+      <div className="wrap">
+        <span className="cb-text"><b>Free call:</b> tell me about your project, no charge, no pressure.</span>
+        <a className="cb-btn" href={`https://wa.me/${CONFIG.whatsapp}?text=${WA_FREE_CALL}`} target="_blank" rel="noopener">Book a free call</a>
+      </div>
+    </div>
+  );
+}
 
 function Nav() {
   return (
@@ -429,6 +442,7 @@ function WhatsAppFloat() {
 export default function App() {
   return (
     <>
+      <CallBanner />
       <Nav />
       <Hero />
       <BeforeAfter />
