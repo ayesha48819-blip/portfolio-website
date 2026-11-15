@@ -48,9 +48,7 @@ function CallBanner() {
   return (
     <div className="call-banner" role="region" aria-label="Free call offer">
       <div className="wrap">
-        <span className="cb-text"><b>Free call:</b> tell me about your project, no charge, no pressure.</span>
-git commit -m "Fix merge conflict in App.jsx"
-git push c9fc5ce800864f523f7ff6c6818a7798a9553090
+        <span className="cb-text"><b>Free 15-minute call</b> — advice, not a sales pitch</span>
         <a className="cb-btn" href={`https://wa.me/${CONFIG.whatsapp}?text=${WA_FREE_CALL}`} target="_blank" rel="noopener">Book a free call</a>
       </div>
     </div>
@@ -351,6 +349,7 @@ function Projects() {
                   <div className="chips">{(p.tech || []).map((t) => <span key={t}>{t}</span>)}</div>
                   <div className="row">
                     {p.live && <a href={p.live} target="_blank" rel="noopener">Live demo</a>}
+                    {p.code && <a href={p.code} target="_blank" rel="noopener">Source code</a>}
                   </div>
                 </div>
               </article>
