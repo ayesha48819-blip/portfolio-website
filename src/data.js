@@ -1,13 +1,14 @@
 export const CONFIG = {
-  whatsapp: "923156170695",
-  email: "ayeshu456789@gmail.com",
+  whatsapp: "971582085220",
+  email: "globalbusinessmanager4@gmail.com",
   linkedin: "https://www.linkedin.com/in/ayesha-nadeem-b378413a2/",
   github: "https://github.com/ayesha48819-blip",
 };
 
-export const PRICES = {
-  types: { landing: [8000, 15000], business: [15000, 30000], webapp: [40000, 80000] },
-  addons: { seo: [5000, 10000], contact: [1500, 3000], admin: [10000, 25000] },
+// Same prices in US dollars for international and Dubai clients (approx. 1 USD = 280 PKR)
+export const PRICES_USD = {
+  types: { landing: [100, 125], business: [250, 500], webapp: [500, 750] },
+  addons: { seo: [20, 35], contact: [20, 40], admin: [35, 90] },
 };
 export const NAMES = {
   landing: "Landing page", business: "Business website", webapp: "Web app",
@@ -34,4 +35,12 @@ export const PROJECTS = [
   { label: "Demo project", title: "Small Business Website",
     text: "A professional website for a small home-services business, with service cards, a quote request form and an FAQ.",
     tech: ["HTML", "CSS", "JavaScript"], image: "/images/business.jpg", live: "/demos/business.html", code: "" },
+  { label: "Demo project", title: "Hair Salon Website",
+    text: "A modern, responsive website for a hair salon with services, stylists, a before/after slider and a booking drawer.",
+    tech: ["React", "Tailwind CSS", "React Router"], image: "images/haircut.jpg",
+    live: "https://hair-salon-sigma-sooty.vercel.app", code: "https://github.com/ayesha48819-blip/Hair-cut" },
+  { label: "Course project", title: "Student Management System",
+    text: "A MERN stack app with full CRUD: add, view, edit and delete student records, stored in MongoDB.",
+    tech: ["React", "Node.js", "Express", "MongoDB"], image: "images/student.jpg",
+    live: "https://student-management-system-m-murex.vercel.app/", code: "https://github.com/ayesha48819-blip/Student-Management-System" },
 ];

@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { initInteractions } from "./interactions.js";
 import {
-  CONFIG, PRICES, NAMES, STORY, SPECIALITY, BEST_FIT, TESTIMONIALS, PROJECTS,
+  CONFIG,
+  PRICES_USD as PRICES,
+  NAMES,
+  STORY,
+  SPECIALITY,
+  BEST_FIT,
+  TESTIMONIALS,
+  PROJECTS,
 } from "./data.js";
 
 const pkr = (n) => n.toLocaleString("en-US");
+const WA_FREE_CALL = encodeURIComponent("Hi Ayesha, I'd like to book a free call about my website project.");
 const WA_HELLO = encodeURIComponent("Hi Ayesha, I saw your portfolio and I'd like to talk about a website.");
 
 const WA_PATH_1 = "M16 4a12 12 0 0 0-10.3 18L4 28l6.2-1.6A12 12 0 1 0 16 4z";
@@ -33,6 +42,18 @@ const ICONS = {
     </svg>
   ),
 };
+
+function CallBanner() {
+  if (!CONFIG.whatsapp) return null;
+  return (
+    <div className="call-banner" role="region" aria-label="Free call offer">
+      <div className="wrap">
+        <span className="cb-text"><b>Free 15-minute call</b> — advice, not a sales pitch</span>
+        <a className="cb-btn" href={`https://wa.me/${CONFIG.whatsapp}?text=${WA_FREE_CALL}`} target="_blank" rel="noopener">Book a free call</a>
+      </div>
+    </div>
+  );
+}
 
 function Nav() {
   return (
@@ -69,12 +90,42 @@ function Hero() {
             <div className="cta">
               <a className="btn fill" href="#contact">Start a project</a>
               <a className="btn" href="#estimate">Get a quick estimate</a>
+              <div className="hero-actions">
+                <a className="btn" href="/Ayesha_Nadeem_CV.pdf" download="Ayesha_Nadeem_CV.pdf">Download CV</a>
+              </div>
             </div>
           </div>
           <img className="photo on" id="photo" alt="Portrait of Ayesha Nadeem" src="/images/ayesha.jpg" />
         </div>
       </div>
     </header>
+  );
+}
+
+function Experience() {
+  return (
+    <section className="exp" id="experience">
+      <div className="exp-inner">
+        <p className="exp-kicker">Experience</p>
+        <h2 className="exp-title">Where I have worked</h2>
+        <div className="exp-card">
+          <div className="exp-top">
+            <div>
+              <h3>Web Development Intern</h3>
+              <p className="exp-company">TechPock</p>
+            </div>
+            <span className="exp-date">Aug 2026 – Oct 2026</span>
+          </div>
+          <ul>
+            <li>Worked with clients on web projects and built the websites they requested.</li>
+            <li>Built responsive web pages and features using HTML, CSS, JavaScript and React.</li>
+          </ul>
+          <div className="exp-tags">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -85,7 +136,7 @@ function BeforeAfter() {
       <div className="wrap">
         <h2>See the difference</h2>
         <p className="lede">Same bakery, same information. Drag the slider to compare an old-style website with the kind I build.</p>
-        <div className="frame" id="frame" style={{ "--p": p + "%" }}>
+        <div className="frame" id="frame" data-cursor="DRAG" style={{ "--p": p + "%" }}>
           <div className="layer after">
             <div className="neu">
               <div className="top"><b>Noor Bakers</b><span>Order on WhatsApp</span></div>
@@ -180,7 +231,7 @@ function Estimate() {
   const msg =
     `Hi Ayesha, I'd like a ${NAMES[type]}` +
     (adds.length ? ` with ${adds.map((a) => NAMES[a]).join(", ")}` : "") +
-    `. Your estimate was PKR ${pkr(lo)} to ${pkr(hi)}. Can we talk?`;
+    `. Your estimate was $${pkr(lo)} to $${pkr(hi)}. Can we talk?`;
 
   let sendProps = { href: "#contact" };
   if (CONFIG.whatsapp) {
@@ -229,11 +280,13 @@ function Estimate() {
           </div>
           <div className="result" aria-live="polite">
             <small>Estimated price</small>
-            <div className="price" id="price">PKR {pkr(lo)} to {pkr(hi)}</div>
+            <div className="price" id="price">
+              ${pkr(lo)} to ${pkr(hi)}
+            </div>
             <ul id="breakdown">
               {rows.map((k) => {
                 const r = PRICES.types[k] || PRICES.addons[k];
-                return <li key={k}>{NAMES[k]}: PKR {pkr(r[0])} to {pkr(r[1])}</li>;
+                return <li key={k}>{NAMES[k]}: ${pkr(r[0])} to ${pkr(r[1])}</li>;
               })}
             </ul>
             <a className="btn fill" id="sendEst" {...sendProps}>Send this to Ayesha</a>
@@ -278,7 +331,7 @@ function Projects() {
         <div className="grid" id="projects">
           {list.map((p) =>
             p.placeholder ? (
-              <article className="proj empty" key={p.title || "placeholder"}>
+              <article className="proj empty" key={p.title || "placeholder"} data-cursor="VIEW">
                 <div className="shot">Project screenshot</div>
                 <div className="body">
                   <h3>Your next project here</h3>
@@ -286,7 +339,7 @@ function Projects() {
                 </div>
               </article>
             ) : (
-              <article className="proj" key={p.title}>
+              <article className="proj" key={p.title} data-cursor="VIEW">
                 <div className="shot">
                   {p.image ? <img src={p.image} alt={`Screenshot of ${p.title}`} loading="lazy" /> : p.title}
                 </div>
@@ -297,7 +350,6 @@ function Projects() {
                   <div className="chips">{(p.tech || []).map((t) => <span key={t}>{t}</span>)}</div>
                   <div className="row">
                     {p.live && <a href={p.live} target="_blank" rel="noopener">Live demo</a>}
-                    {p.code && <a href={p.code} target="_blank" rel="noopener">Source code</a>}
                   </div>
                 </div>
               </article>
@@ -354,7 +406,7 @@ function Education() {
         <h2>Training and certificates</h2>
         <p className="lede">Where I learned, and the proof.</p>
         <div className="rows">
-          <div className="edu"><h3>Full Stack Web Development (MERN)</h3><div className="meta">Arfa Software Technology Park, Lahore. Certificate program, March to September 2026.</div></div>
+          <div className="edu"><h3>Full Stack Web Development (MERN)</h3><div className="meta">Arfa Software Technology Park, Lahore.</div></div>
           <div className="edu"><h3>Start Writing Prompts like a Pro</h3><div className="meta">Google, offered through Coursera. Completed March 2026. <a href="https://coursera.org/verify/YXYIEEXEI4J1" target="_blank" rel="noopener">Verify this certificate</a></div></div>
           <div className="edu"><h3>Matriculation, Science with Computer Science</h3><div className="meta">Tehzeeb ul Atfal High School. 1014 out of 1100 marks (92.2%).</div></div>
         </div>
@@ -427,10 +479,16 @@ function WhatsAppFloat() {
 }
 
 export default function App() {
+  useEffect(() => {
+    initInteractions();
+  }, []);
+
   return (
     <>
+      <CallBanner />
       <Nav />
       <Hero />
+      <Experience />
       <BeforeAfter />
       <About />
       <Services />
