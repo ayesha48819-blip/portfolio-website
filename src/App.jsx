@@ -48,7 +48,11 @@ function CallBanner() {
   return (
     <div className="call-banner" role="region" aria-label="Free call offer">
       <div className="wrap">
+<<<<<<< HEAD
         <span className="cb-text"><b>Free 15-minute call</b> — advice, not a sales pitch</span>
+=======
+        <span className="cb-text"><b>Free call:</b> tell me about your project, no charge, no pressure.</span>
+>>>>>>> c9fc5ce800864f523f7ff6c6818a7798a9553090
         <a className="cb-btn" href={`https://wa.me/${CONFIG.whatsapp}?text=${WA_FREE_CALL}`} target="_blank" rel="noopener">Book a free call</a>
       </div>
     </div>
