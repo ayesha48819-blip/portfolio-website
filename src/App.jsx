@@ -54,6 +54,7 @@ function CallBanner() {
     </div>
   );
 }
+
 function Nav() {
   return (
     <nav>
@@ -349,7 +350,6 @@ function Projects() {
                   <div className="chips">{(p.tech || []).map((t) => <span key={t}>{t}</span>)}</div>
                   <div className="row">
                     {p.live && <a href={p.live} target="_blank" rel="noopener">Live demo</a>}
-                    {p.code && <a href={p.code} target="_blank" rel="noopener">Source code</a>}
                   </div>
                 </div>
               </article>
